@@ -3,6 +3,8 @@ package configmap
 import (
 	"os"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestMain(m *testing.M) {
@@ -14,20 +16,28 @@ func TestUnit_Set(t *testing.T) {
 	cm := NewConfigMap()
 	cm.Set("foo", str)
 	act := cm.Get("foo")
-	if act != str {
-		t.Fatalf("act != str")
-	}
+	assert.Equal(t, str, act)
 }
 
-func TestUnit_GetStringOrNil(t *testing.T) {
-	cm := NewConfigMap()
-	cm.Set("foo", "bar")
-	baz := cm.GetStringOrNil("baz")
-	bar := cm.GetString("foo")
-	if baz != nil {
-		t.Fatalf("baz != nil")
-	}
-	if bar != "bar" {
-		t.Fatalf("bar != bar")
-	}
+func TestUnit_GetByKey_Basic(t *testing.T) {
+	expected := "fnord"
+	data := NewConfigMap(map[string]interface{}{
+		"foo": map[string]interface{}{
+			"bar": map[string]interface{}{
+				"baz": expected,
+			},
+		},
+	})
+	actual := data.GetByKey([]string{"foo", "bar", "baz"})
+	assert.Equal(t, expected, actual)
+}
+
+func TestUnit_GetByKey_Negative(t *testing.T) {
+	data := NewConfigMap(map[string]interface{}{
+		"foo": map[string]interface{}{
+			"bar": "narf",
+		},
+	})
+	actual := data.GetByKey([]string{"foo", "bar", "baz"})
+	assert.Nil(t, actual)
 }

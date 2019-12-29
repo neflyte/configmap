@@ -1,6 +1,6 @@
 package configmap
 
-func (c *configMap) GetByte(key string) byte {
+func (c *Configmap) GetByte(key string) byte {
 	b := byte(0)
 	byteIntf := c.Get(key)
 	if byteIntf != nil {
@@ -12,7 +12,7 @@ func (c *configMap) GetByte(key string) byte {
 	return b
 }
 
-func (c *configMap) GetBool(key string) bool {
+func (c *Configmap) GetBool(key string) bool {
 	b := false
 	boolIntf := c.Get(key)
 	if boolIntf != nil {
@@ -24,7 +24,7 @@ func (c *configMap) GetBool(key string) bool {
 	return b
 }
 
-func (c *configMap) GetInt(key string) int {
+func (c *Configmap) GetInt(key string) int {
 	i := 0
 	intIntf := c.Get(key)
 	if intIntf != nil {
@@ -36,7 +36,7 @@ func (c *configMap) GetInt(key string) int {
 	return i
 }
 
-func (c *configMap) GetUInt(key string) uint {
+func (c *Configmap) GetUInt(key string) uint {
 	u := uint(0)
 	uintIntf := c.Get(key)
 	if uintIntf != nil {
@@ -48,7 +48,7 @@ func (c *configMap) GetUInt(key string) uint {
 	return u
 }
 
-func (c *configMap) GetUIntPtr(key string) uintptr {
+func (c *Configmap) GetUIntPtr(key string) uintptr {
 	up := uintptr(0)
 	uintptrIntf := c.Get(key)
 	if uintptrIntf != nil {
@@ -60,7 +60,7 @@ func (c *configMap) GetUIntPtr(key string) uintptr {
 	return up
 }
 
-func (c *configMap) GetInt8(key string) int8 {
+func (c *Configmap) GetInt8(key string) int8 {
 	i := int8(0)
 	intIntf := c.Get(key)
 	if intIntf != nil {
@@ -72,7 +72,7 @@ func (c *configMap) GetInt8(key string) int8 {
 	return i
 }
 
-func (c *configMap) GetUInt8(key string) uint8 {
+func (c *Configmap) GetUInt8(key string) uint8 {
 	u := uint8(0)
 	uintIntf := c.Get(key)
 	if uintIntf != nil {
@@ -84,7 +84,7 @@ func (c *configMap) GetUInt8(key string) uint8 {
 	return u
 }
 
-func (c *configMap) GetInt16(key string) int16 {
+func (c *Configmap) GetInt16(key string) int16 {
 	i := int16(0)
 	intIntf := c.Get(key)
 	if intIntf != nil {
@@ -96,7 +96,7 @@ func (c *configMap) GetInt16(key string) int16 {
 	return i
 }
 
-func (c *configMap) GetUInt16(key string) uint16 {
+func (c *Configmap) GetUInt16(key string) uint16 {
 	u := uint16(0)
 	uintIntf := c.Get(key)
 	if uintIntf != nil {
@@ -108,7 +108,7 @@ func (c *configMap) GetUInt16(key string) uint16 {
 	return u
 }
 
-func (c *configMap) GetInt32(key string) int32 {
+func (c *Configmap) GetInt32(key string) int32 {
 	i := int32(0)
 	intIntf := c.Get(key)
 	if intIntf != nil {
@@ -120,7 +120,7 @@ func (c *configMap) GetInt32(key string) int32 {
 	return i
 }
 
-func (c *configMap) GetUInt32(key string) uint32 {
+func (c *Configmap) GetUInt32(key string) uint32 {
 	u := uint32(0)
 	uintIntf := c.Get(key)
 	if uintIntf != nil {
@@ -132,7 +132,7 @@ func (c *configMap) GetUInt32(key string) uint32 {
 	return u
 }
 
-func (c *configMap) GetInt64(key string) int64 {
+func (c *Configmap) GetInt64(key string) int64 {
 	i := int64(0)
 	intIntf := c.Get(key)
 	if intIntf != nil {
@@ -144,7 +144,7 @@ func (c *configMap) GetInt64(key string) int64 {
 	return i
 }
 
-func (c *configMap) GetUInt64(key string) uint64 {
+func (c *Configmap) GetUInt64(key string) uint64 {
 	u := uint64(0)
 	uintIntf := c.Get(key)
 	if uintIntf != nil {
@@ -156,7 +156,7 @@ func (c *configMap) GetUInt64(key string) uint64 {
 	return u
 }
 
-func (c *configMap) GetFloat32(key string) float32 {
+func (c *Configmap) GetFloat32(key string) float32 {
 	f := float32(0.0)
 	floatIntf := c.Get(key)
 	if floatIntf != nil {
@@ -168,7 +168,7 @@ func (c *configMap) GetFloat32(key string) float32 {
 	return f
 }
 
-func (c *configMap) GetFloat64(key string) float64 {
+func (c *Configmap) GetFloat64(key string) float64 {
 	f := 0.0
 	floatIntf := c.Get(key)
 	if floatIntf != nil {
@@ -180,7 +180,7 @@ func (c *configMap) GetFloat64(key string) float64 {
 	return f
 }
 
-func (c *configMap) GetComplex64(key string) complex64 {
+func (c *Configmap) GetComplex64(key string) complex64 {
 	cplx := complex64(0)
 	cplxIntf := c.Get(key)
 	if cplxIntf != nil {
@@ -192,7 +192,7 @@ func (c *configMap) GetComplex64(key string) complex64 {
 	return cplx
 }
 
-func (c *configMap) GetComplex128(key string) complex128 {
+func (c *Configmap) GetComplex128(key string) complex128 {
 	cplx := complex128(0)
 	cplxIntf := c.Get(key)
 	if cplxIntf != nil {
@@ -204,7 +204,7 @@ func (c *configMap) GetComplex128(key string) complex128 {
 	return cplx
 }
 
-func (c *configMap) GetString(key string) string {
+func (c *Configmap) GetString(key string) string {
 	str := ""
 	strIntf := c.Get(key)
 	if strIntf != nil {
@@ -216,7 +216,7 @@ func (c *configMap) GetString(key string) string {
 	return str
 }
 
-func (c *configMap) GetMapSI(key string) map[string]interface{} {
+func (c *Configmap) GetMapSI(key string) map[string]interface{} {
 	mapSI := make(map[string]interface{})
 	mapSIIntf := c.Get(key)
 	if mapSIIntf != nil {
@@ -228,14 +228,14 @@ func (c *configMap) GetMapSI(key string) map[string]interface{} {
 	return mapSI
 }
 
-func (c *configMap) GetConfigMap(key string) ConfigMap {
+func (c *Configmap) GetConfigMap(key string) ConfigMap {
 	cm := NewConfigMap()
 	cmIntf := c.Get(key)
 	if cmIntf != nil {
 		switch cmIntf.(type) {
-		case ConfigMap, configMap:
+		case ConfigMap, Configmap:
 			cm = cmIntf.(ConfigMap)
-		case *ConfigMap, *configMap:
+		case *ConfigMap, *Configmap:
 			cmPtr := cmIntf.(*ConfigMap)
 			cm = *cmPtr
 		case map[string]interface{}:

@@ -2,8 +2,8 @@ package configmap
 
 import "reflect"
 
-// configMap is an alias for the underlying type (map[string]interface{})
-type configMap map[string]interface{}
+// Configmap is an alias for the underlying type (map[string]interface{})
+type Configmap map[string]interface{}
 
 // ConfigMap is the interface wrapper around a map[string]interface{}
 type ConfigMap interface {
@@ -50,13 +50,13 @@ type ConfigMap interface {
 
 // NewConfigMap creates a new ConfigMap, optionally based on an existing ConfigMap or map[string]interface{}
 func NewConfigMap(args ...interface{}) ConfigMap {
-	cm := make(configMap)
+	cm := make(Configmap)
 	for _, arg := range args {
 		switch arg.(type) {
-		case ConfigMap, configMap:
-			cm = arg.(configMap)
-		case *ConfigMap, *configMap:
-			cmPtr := arg.(*configMap)
+		case ConfigMap, Configmap:
+			cm = arg.(Configmap)
+		case *ConfigMap, *Configmap:
+			cmPtr := arg.(*Configmap)
 			cm = *cmPtr
 		case map[string]interface{}:
 			cm = arg.(map[string]interface{})
@@ -74,26 +74,26 @@ func IsConfigMap(arg interface{}) bool {
 		return false
 	}
 	switch arg.(type) {
-	case ConfigMap, *ConfigMap, map[string]interface{}, *map[string]interface{}, configMap, *configMap:
+	case ConfigMap, *ConfigMap, map[string]interface{}, *map[string]interface{}, Configmap, *Configmap:
 		return true
 	}
 	return false
 }
 
 // Set sets a value in the map
-func (c *configMap) Set(key string, value interface{}) {
+func (c *Configmap) Set(key string, value interface{}) {
 	mapSI := map[string]interface{}(*c)
 	mapSI[key] = value
 }
 
 // Get retrieves a value from the map
-func (c *configMap) Get(key string) interface{} {
+func (c *Configmap) Get(key string) interface{} {
 	mapSI := map[string]interface{}(*c)
 	return mapSI[key]
 }
 
 // GetByKey retrieves a value by following a path of keys; all values except the last must be ConfigMaps
-func (c *configMap) GetByKey(keys []string) interface{} {
+func (c *Configmap) GetByKey(keys []string) interface{} {
 	if len(keys) > 0 {
 		if len(keys) == 1 { // last key
 			return c.Get(keys[0])
@@ -106,6 +106,6 @@ func (c *configMap) GetByKey(keys []string) interface{} {
 }
 
 // GetType returns the reflect.Type of the value retrieved from the map
-func (c *configMap) GetType(key string) reflect.Type {
+func (c *Configmap) GetType(key string) reflect.Type {
 	return reflect.TypeOf(c.Get(key))
 }

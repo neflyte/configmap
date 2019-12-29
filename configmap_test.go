@@ -8,13 +8,13 @@ import (
 )
 
 var (
-	testMap = &configMap{
+	testMap = &Configmap{
 		"int":   1,
 		"int8":  int8(2),
 		"int16": int16(3),
 		"int32": int32(4),
 		"int64": int64(5),
-		"map": &configMap{
+		"map": &Configmap{
 			"key": "value",
 		},
 	}
@@ -56,7 +56,7 @@ func TestUnit_GetByKey_Negative(t *testing.T) {
 }
 
 func TestUnit_StructLiteral(t *testing.T) {
-	foo := &configMap{"key": "value"}
+	foo := &Configmap{"key": "value"}
 	assert.Equal(t, "value", foo.GetString("key"))
 }
 
@@ -66,5 +66,5 @@ func TestUnit_TestMap(t *testing.T) {
 	assert.Equal(t, int16(3), testMap.GetInt16("int16"))
 	assert.Equal(t, int32(4), testMap.GetInt32("int32"))
 	assert.Equal(t, int64(5), testMap.GetInt64("int64"))
-	assert.Equal(t, &configMap{"key": "value"}, testMap.GetConfigMap("map"))
+	assert.Equal(t, &Configmap{"key": "value"}, testMap.GetConfigMap("map"))
 }

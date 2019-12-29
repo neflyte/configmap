@@ -1,6 +1,6 @@
 package configmap
 
-func (c *configMap) GetSliceMapSI(key string) []map[string]interface{} {
+func (c *Configmap) GetSliceMapSI(key string) []map[string]interface{} {
 	sliceMapSI := make([]map[string]interface{}, 0)
 	sliceMapSIIntf := c.Get(key)
 	if sliceMapSIIntf != nil {
@@ -12,7 +12,7 @@ func (c *configMap) GetSliceMapSI(key string) []map[string]interface{} {
 	return sliceMapSI
 }
 
-func (c *configMap) GetSlice(key string) []interface{} {
+func (c *Configmap) GetSlice(key string) []interface{} {
 	sliceIntf := make([]interface{}, 0)
 	sliceIntfIntf := c.Get(key)
 	if sliceIntfIntf != nil {

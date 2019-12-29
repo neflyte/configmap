@@ -1,6 +1,6 @@
 package configmap
 
-func (c *configMap) GetStringOrNil(key string) *string {
+func (c *Configmap) GetStringOrNil(key string) *string {
 	strIntf := c.Get(key)
 	if strIntf == nil {
 		return nil

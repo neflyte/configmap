@@ -1,4 +1,4 @@
-module configmap
+module github.com/neflyte/configmap
 
 go 1.12
 

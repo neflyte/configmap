@@ -3,6 +3,8 @@ package configmap
 import (
 	"encoding/json"
 	"fmt"
+
+	"github.com/go-yaml/yaml"
 )
 
 // AsMapSI returns the ConfigMap as its underlying data type
@@ -14,6 +16,13 @@ func (c *Configmap) AsMapSI() map[string]interface{} {
 func (c *Configmap) AsJSON() []byte {
 	result := make([]byte, 0)
 	result, _ = json.Marshal(*c)
+	return result
+}
+
+// AsYAML returns the ConfigMap as a Marshaled YAML string ([]byte)
+func (c *Configmap) AsYAML() []byte {
+	result := make([]byte, 0)
+	result, _ = yaml.Marshal(*c)
 	return result
 }
 

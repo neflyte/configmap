@@ -1,5 +1,209 @@
 package configmap
 
+func (c *configMap) GetByte(key string) byte {
+	b := byte(0)
+	byteIntf := c.Get(key)
+	if byteIntf != nil {
+		switch byteIntf.(type) {
+		case byte:
+			b = byteIntf.(byte)
+		}
+	}
+	return b
+}
+
+func (c *configMap) GetBool(key string) bool {
+	b := false
+	boolIntf := c.Get(key)
+	if boolIntf != nil {
+		switch boolIntf.(type) {
+		case bool:
+			b = boolIntf.(bool)
+		}
+	}
+	return b
+}
+
+func (c *configMap) GetInt(key string) int {
+	i := 0
+	intIntf := c.Get(key)
+	if intIntf != nil {
+		switch intIntf.(type) {
+		case int:
+			i = intIntf.(int)
+		}
+	}
+	return i
+}
+
+func (c *configMap) GetUInt(key string) uint {
+	u := uint(0)
+	uintIntf := c.Get(key)
+	if uintIntf != nil {
+		switch uintIntf.(type) {
+		case uint:
+			u = uintIntf.(uint)
+		}
+	}
+	return u
+}
+
+func (c *configMap) GetUIntPtr(key string) uintptr {
+	up := uintptr(0)
+	uintptrIntf := c.Get(key)
+	if uintptrIntf != nil {
+		switch uintptrIntf.(type) {
+		case uintptr:
+			up = uintptrIntf.(uintptr)
+		}
+	}
+	return up
+}
+
+func (c *configMap) GetInt8(key string) int8 {
+	i := int8(0)
+	intIntf := c.Get(key)
+	if intIntf != nil {
+		switch intIntf.(type) {
+		case int8:
+			i = intIntf.(int8)
+		}
+	}
+	return i
+}
+
+func (c *configMap) GetUInt8(key string) uint8 {
+	u := uint8(0)
+	uintIntf := c.Get(key)
+	if uintIntf != nil {
+		switch uintIntf.(type) {
+		case uint8:
+			u = uintIntf.(uint8)
+		}
+	}
+	return u
+}
+
+func (c *configMap) GetInt16(key string) int16 {
+	i := int16(0)
+	intIntf := c.Get(key)
+	if intIntf != nil {
+		switch intIntf.(type) {
+		case int16:
+			i = intIntf.(int16)
+		}
+	}
+	return i
+}
+
+func (c *configMap) GetUInt16(key string) uint16 {
+	u := uint16(0)
+	uintIntf := c.Get(key)
+	if uintIntf != nil {
+		switch uintIntf.(type) {
+		case uint16:
+			u = uintIntf.(uint16)
+		}
+	}
+	return u
+}
+
+func (c *configMap) GetInt32(key string) int32 {
+	i := int32(0)
+	intIntf := c.Get(key)
+	if intIntf != nil {
+		switch intIntf.(type) {
+		case int32:
+			i = intIntf.(int32)
+		}
+	}
+	return i
+}
+
+func (c *configMap) GetUInt32(key string) uint32 {
+	u := uint32(0)
+	uintIntf := c.Get(key)
+	if uintIntf != nil {
+		switch uintIntf.(type) {
+		case uint32:
+			u = uintIntf.(uint32)
+		}
+	}
+	return u
+}
+
+func (c *configMap) GetInt64(key string) int64 {
+	i := int64(0)
+	intIntf := c.Get(key)
+	if intIntf != nil {
+		switch intIntf.(type) {
+		case int64:
+			i = intIntf.(int64)
+		}
+	}
+	return i
+}
+
+func (c *configMap) GetUInt64(key string) uint64 {
+	u := uint64(0)
+	uintIntf := c.Get(key)
+	if uintIntf != nil {
+		switch uintIntf.(type) {
+		case uint64:
+			u = uintIntf.(uint64)
+		}
+	}
+	return u
+}
+
+func (c *configMap) GetFloat32(key string) float32 {
+	f := float32(0.0)
+	floatIntf := c.Get(key)
+	if floatIntf != nil {
+		switch floatIntf.(type) {
+		case float32:
+			f = floatIntf.(float32)
+		}
+	}
+	return f
+}
+
+func (c *configMap) GetFloat64(key string) float64 {
+	f := 0.0
+	floatIntf := c.Get(key)
+	if floatIntf != nil {
+		switch floatIntf.(type) {
+		case float64:
+			f = floatIntf.(float64)
+		}
+	}
+	return f
+}
+
+func (c *configMap) GetComplex64(key string) complex64 {
+	cplx := complex64(0)
+	cplxIntf := c.Get(key)
+	if cplxIntf != nil {
+		switch cplxIntf.(type) {
+		case complex64:
+			cplx = cplxIntf.(complex64)
+		}
+	}
+	return cplx
+}
+
+func (c *configMap) GetComplex128(key string) complex128 {
+	cplx := complex128(0)
+	cplxIntf := c.Get(key)
+	if cplxIntf != nil {
+		switch cplxIntf.(type) {
+		case complex128:
+			cplx = cplxIntf.(complex128)
+		}
+	}
+	return cplx
+}
+
 func (c *configMap) GetString(key string) string {
 	str := ""
 	strIntf := c.Get(key)
@@ -22,30 +226,6 @@ func (c *configMap) GetMapSI(key string) map[string]interface{} {
 		}
 	}
 	return mapSI
-}
-
-func (c *configMap) GetSliceMapSI(key string) []map[string]interface{} {
-	sliceMapSI := make([]map[string]interface{}, 0)
-	sliceMapSIIntf := c.Get(key)
-	if sliceMapSIIntf != nil {
-		switch sliceMapSIIntf.(type) {
-		case []map[string]interface{}:
-			sliceMapSI = sliceMapSIIntf.([]map[string]interface{})
-		}
-	}
-	return sliceMapSI
-}
-
-func (c *configMap) GetSlice(key string) []interface{} {
-	sliceIntf := make([]interface{}, 0)
-	sliceIntfIntf := c.Get(key)
-	if sliceIntfIntf != nil {
-		switch sliceIntfIntf.(type) {
-		case []interface{}:
-			sliceIntf = sliceIntfIntf.([]interface{})
-		}
-	}
-	return sliceIntf
 }
 
 func (c *configMap) GetConfigMap(key string) ConfigMap {

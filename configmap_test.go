@@ -7,6 +7,19 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+var (
+	testMap = &configMap{
+		"int":   1,
+		"int8":  int8(2),
+		"int16": int16(3),
+		"int32": int32(4),
+		"int64": int64(5),
+		"map": &configMap{
+			"key": "value",
+		},
+	}
+)
+
 func TestMain(m *testing.M) {
 	os.Exit(m.Run())
 }
@@ -40,4 +53,18 @@ func TestUnit_GetByKey_Negative(t *testing.T) {
 	})
 	actual := data.GetByKey([]string{"foo", "bar", "baz"})
 	assert.Nil(t, actual)
+}
+
+func TestUnit_StructLiteral(t *testing.T) {
+	foo := &configMap{"key": "value"}
+	assert.Equal(t, "value", foo.GetString("key"))
+}
+
+func TestUnit_TestMap(t *testing.T) {
+	assert.Equal(t, 1, testMap.GetInt("int"))
+	assert.Equal(t, int8(2), testMap.GetInt8("int8"))
+	assert.Equal(t, int16(3), testMap.GetInt16("int16"))
+	assert.Equal(t, int32(4), testMap.GetInt32("int32"))
+	assert.Equal(t, int64(5), testMap.GetInt64("int64"))
+	assert.Equal(t, &configMap{"key": "value"}, testMap.GetConfigMap("map"))
 }

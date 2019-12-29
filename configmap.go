@@ -1,5 +1,7 @@
 package configmap
 
+import "reflect"
+
 // configMap is an alias for the underlying type (map[string]interface{})
 type configMap map[string]interface{}
 
@@ -7,18 +9,40 @@ type configMap map[string]interface{}
 type ConfigMap interface {
 	// Convenience methods
 	AsMapSI() map[string]interface{}
+	AsMapStringString() map[string]string
+	AsJSON() []byte
 
 	// Core methods
 	Set(key string, value interface{})
 	Get(key string) interface{}
 	GetByKey(keys []string) interface{}
+	GetType(key string) reflect.Type
 
 	// Getters
+	GetByte(key string) byte
+	GetBool(key string) bool
+	GetInt(key string) int
+	GetUInt(key string) uint
+	GetUIntPtr(key string) uintptr
+	GetInt8(key string) int8
+	GetUInt8(key string) uint8
+	GetInt16(key string) int16
+	GetUInt16(key string) uint16
+	GetInt32(key string) int32
+	GetUInt32(key string) uint32
+	GetInt64(key string) int64
+	GetUInt64(key string) uint64
+	GetFloat32(key string) float32
+	GetFloat64(key string) float64
+	GetComplex64(key string) complex64
+	GetComplex128(key string) complex128
 	GetString(key string) string
 	GetMapSI(key string) map[string]interface{}
+	GetConfigMap(key string) ConfigMap
+
+	// Slices
 	GetSliceMapSI(key string) []map[string]interface{}
 	GetSlice(key string) []interface{}
-	GetConfigMap(key string) ConfigMap
 
 	// OrNil
 	GetStringOrNil(key string) *string
@@ -79,4 +103,9 @@ func (c *configMap) GetByKey(keys []string) interface{} {
 		}
 	}
 	return nil
+}
+
+// GetType returns the reflect.Type of the value retrieved from the map
+func (c *configMap) GetType(key string) reflect.Type {
+	return reflect.TypeOf(c.Get(key))
 }

@@ -26,7 +26,7 @@ func TestMain(m *testing.M) {
 
 func TestUnit_Set(t *testing.T) {
 	str := "bar"
-	cm := NewConfigMap()
+	cm := New()
 	cm.Set("foo", str)
 	act := cm.Get("foo")
 	assert.Equal(t, str, act)
@@ -34,7 +34,7 @@ func TestUnit_Set(t *testing.T) {
 
 func TestUnit_GetByKey_Basic(t *testing.T) {
 	expected := "fnord"
-	data := NewConfigMap(map[string]interface{}{
+	data := New(map[string]interface{}{
 		"foo": map[string]interface{}{
 			"bar": map[string]interface{}{
 				"baz": expected,
@@ -46,7 +46,7 @@ func TestUnit_GetByKey_Basic(t *testing.T) {
 }
 
 func TestUnit_GetByKey_Negative(t *testing.T) {
-	data := NewConfigMap(map[string]interface{}{
+	data := New(map[string]interface{}{
 		"foo": map[string]interface{}{
 			"bar": "narf",
 		},

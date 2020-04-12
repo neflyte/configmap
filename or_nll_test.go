@@ -6,7 +6,7 @@ import (
 )
 
 func TestUnit_GetStringOrNil(t *testing.T) {
-	cm := NewConfigMap()
+	cm := New()
 	cm.Set("foo", "bar")
 	baz := cm.GetStringOrNil("baz")
 	bar := cm.GetString("foo")

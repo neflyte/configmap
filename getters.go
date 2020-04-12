@@ -4,9 +4,9 @@ func (c *Configmap) GetByte(key string) byte {
 	b := byte(0)
 	byteIntf := c.Get(key)
 	if byteIntf != nil {
-		switch byteIntf.(type) {
+		switch byteIntf := byteIntf.(type) {
 		case byte:
-			b = byteIntf.(byte)
+			b = byteIntf
 		}
 	}
 	return b
@@ -16,9 +16,9 @@ func (c *Configmap) GetBool(key string) bool {
 	b := false
 	boolIntf := c.Get(key)
 	if boolIntf != nil {
-		switch boolIntf.(type) {
+		switch boolIntf := boolIntf.(type) {
 		case bool:
-			b = boolIntf.(bool)
+			b = boolIntf
 		}
 	}
 	return b
@@ -229,20 +229,19 @@ func (c *Configmap) GetMapSI(key string) map[string]interface{} {
 }
 
 func (c *Configmap) GetConfigMap(key string) ConfigMap {
-	cm := NewConfigMap()
+	cm := New()
 	cmIntf := c.Get(key)
 	if cmIntf != nil {
-		switch cmIntf.(type) {
+		switch cmIntf := cmIntf.(type) {
 		case ConfigMap, Configmap:
 			cm = cmIntf.(ConfigMap)
 		case *ConfigMap, *Configmap:
 			cmPtr := cmIntf.(*ConfigMap)
 			cm = *cmPtr
 		case map[string]interface{}:
-			cm = NewConfigMap(cmIntf.(map[string]interface{}))
+			cm = New(cmIntf)
 		case *map[string]interface{}:
-			cmPtr := cmIntf.(*map[string]interface{})
-			cm = NewConfigMap(*cmPtr)
+			cm = New(cmIntf)
 		}
 	}
 	return cm

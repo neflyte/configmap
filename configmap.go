@@ -1,6 +1,14 @@
 package configmap
 
-import "reflect"
+import (
+	"encoding/json"
+	"gopkg.in/yaml.v2"
+	"log"
+	"reflect"
+)
+
+// Version is the version number of the library
+const Version = "0.1.0"
 
 // Configmap is an alias for the underlying type (map[string]interface{})
 type Configmap map[string]interface{}
@@ -75,28 +83,41 @@ type ConfigMap interface {
 
 // New creates a new ConfigMap, optionally based on an existing ConfigMap or map[string]interface{}
 func New(args ...interface{}) ConfigMap {
-	cm := make(Configmap)
+	cm := Configmap{}
 	for _, arg := range args {
-		switch arg.(type) {
-		case ConfigMap, Configmap:
-			cm = arg.(Configmap)
-		case *ConfigMap, *Configmap:
-			cmPtr := arg.(*Configmap)
-			cm = *cmPtr
+		switch arg := arg.(type) {
+		case ConfigMap:
+			return arg
+		case *ConfigMap:
+			return *arg
 		case map[string]interface{}:
-			cm = arg.(map[string]interface{})
+			cm = arg
 		case *map[string]interface{}:
-			cmPtr := arg.(*map[string]interface{})
+			cmPtr := arg
 			cm = *cmPtr
 		}
 	}
 	return &cm
 }
 
-// @deprecated
-// NewConfigMap creates a new ConfigMap, optionally based on an existing ConfigMap or map[string]interface{}
-func NewConfigMap(args ...interface{}) ConfigMap {
-	return New(args...)
+// FromJSON returns a ConfigMap that was unmarshalled from a JSON blob
+func FromJSON(rawJSON []byte) ConfigMap {
+	mapsi := make(map[string]interface{})
+	err := json.Unmarshal(rawJSON, &mapsi)
+	if err != nil {
+		log.Printf("error unmarshaling JSON: %s", err)
+	}
+	return New(mapsi)
+}
+
+// FromYAML returns a ConfigMap that was unmarshalled from a YAML document
+func FromYAML(rawYAML []byte) ConfigMap {
+	mapsi := make(map[string]interface{})
+	err := yaml.Unmarshal(rawYAML, &mapsi)
+	if err != nil {
+		log.Printf("error unmarshaling YAML: %s", err)
+	}
+	return New(mapsi)
 }
 
 // IsConfigMap determines if the argument is a ConfigMap or map[string]interface{}

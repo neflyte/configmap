@@ -1,7 +1,6 @@
 package configmap
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 
@@ -11,15 +10,6 @@ import (
 // AsMapSI returns the ConfigMap as its underlying data type
 func (c *Configmap) AsMapSI() map[string]interface{} {
 	return *c
-}
-
-// AsJSON returns the ConfigMap as a Marshaled JSON string ([]byte)
-func (c *Configmap) AsJSON() []byte {
-	result, err := json.Marshal(*c)
-	if err != nil {
-		log.Printf("error marshaling JSON: %s", err)
-	}
-	return result
 }
 
 // AsYAML returns the ConfigMap as a Marshaled YAML string ([]byte)
@@ -49,4 +39,8 @@ func (c *Configmap) AsMapStringString() map[string]string {
 		result[key] = stringVal
 	}
 	return result
+}
+
+func (c *Configmap) AsConfigmap() Configmap {
+	return *c
 }

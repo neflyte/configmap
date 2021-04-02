@@ -3,7 +3,7 @@ module github.com/neflyte/configmap
 go 1.12
 
 require (
-	github.com/stretchr/testify v1.4.0
-	gopkg.in/yaml.v2 v2.2.8 // indirect
-	gopkg.in/yaml.v3 v3.0.0-20200615113413-eeeca48fe776
+	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/stretchr/testify v1.7.0
+	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b
 )

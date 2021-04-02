@@ -1,6 +1,7 @@
 package configmap
 
 import (
+	"bytes"
 	"encoding/json"
 	"gopkg.in/yaml.v3"
 	"log"
@@ -8,7 +9,7 @@ import (
 )
 
 // Version is the version number of the library
-const Version = "0.1.0"
+const Version = "0.2.0"
 
 // Configmap is an alias for the underlying type (map[string]interface{})
 type Configmap map[string]interface{}
@@ -18,8 +19,8 @@ type ConfigMap interface {
 	// Convenience methods
 	AsMapSI() map[string]interface{}
 	AsMapStringString() map[string]string
-	AsJSON() []byte
 	AsYAML() []byte
+	AsConfigmap() Configmap
 
 	// Core methods
 	Set(key string, value interface{})
@@ -79,6 +80,15 @@ type ConfigMap interface {
 	GetStringOrNil(key string) *string
 	GetMapSIOrNil(key string) *map[string]interface{}
 	GetConfigMapOrNil(key string) *ConfigMap
+
+	// JSON methods
+	AsJSON() []byte
+	GetJSONNumber(key string) json.Number
+	GetJSONNumberOrNil(key string) *json.Number
+	GetJSONNumberAsInt64(key string) (numberAsInt int64)
+	GetJSONNumberAsFloat64(key string) (numberAsFloat float64)
+	GetJSONNumberAsInt64OrNil(key string) (numberAsInt *int64)
+	GetJSONNumberAsFloat64OrNil(key string) (numberAsFloat *float64)
 }
 
 // New creates a new ConfigMap, optionally based on an existing ConfigMap or map[string]interface{}
@@ -106,6 +116,19 @@ func FromJSON(rawJSON []byte) ConfigMap {
 	err := json.Unmarshal(rawJSON, &mapsi)
 	if err != nil {
 		log.Printf("error unmarshaling JSON: %s", err)
+	}
+	return New(mapsi)
+}
+
+// FromJSONWithJSONNumbers returns a ConfigMap that was unmarshalled from a JSON blob
+// using json.Number for numeric fields
+func FromJSONWithJSONNumbers(rawJSON []byte) ConfigMap {
+	mapsi := make(map[string]interface{})
+	dec := json.NewDecoder(bytes.NewReader(rawJSON))
+	dec.UseNumber()
+	err := dec.Decode(&mapsi)
+	if err != nil {
+		log.Printf("error decoding JSON: %s", err)
 	}
 	return New(mapsi)
 }

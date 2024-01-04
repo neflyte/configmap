@@ -3,13 +3,14 @@ package configmap
 import (
 	"bytes"
 	"encoding/json"
-	"gopkg.in/yaml.v3"
 	"log"
 	"reflect"
+
+	"gopkg.in/yaml.v3"
 )
 
 // Version is the version number of the library
-const Version = "0.2.0"
+const Version = "0.3.0"
 
 // Configmap is an alias for the underlying type (map[string]interface{})
 type Configmap map[string]interface{}
@@ -17,12 +18,14 @@ type Configmap map[string]interface{}
 // ConfigMap is the interface wrapper around a map[string]interface{}
 type ConfigMap interface {
 	// Convenience methods
+
 	AsMapSI() map[string]interface{}
 	AsMapStringString() map[string]string
 	AsYAML() []byte
 	AsConfigmap() Configmap
 
 	// Core methods
+
 	Set(key string, value interface{})
 	Get(key string) interface{}
 	Has(key string) bool
@@ -32,6 +35,7 @@ type ConfigMap interface {
 	GetType(key string) reflect.Type
 
 	// Getters
+
 	GetByte(key string) byte
 	GetBool(key string) bool
 	GetInt(key string) int
@@ -54,12 +58,14 @@ type ConfigMap interface {
 	GetConfigMap(key string) ConfigMap
 
 	// Slices
+
 	GetSlice(key string) []interface{}
 	GetSliceMapSI(key string) []map[string]interface{}
 	GetSliceString(key string) []string
 	GetSliceByte(key string) []byte
 
 	// OrNil
+
 	GetByteOrNil(key string) *byte
 	GetBoolOrNil(key string) *bool
 	GetIntOrNil(key string) *int
@@ -82,6 +88,7 @@ type ConfigMap interface {
 	GetConfigMapOrNil(key string) *ConfigMap
 
 	// JSON methods
+
 	AsJSON() []byte
 	GetJSONNumber(key string) json.Number
 	GetJSONNumberOrNil(key string) *json.Number

@@ -33,8 +33,7 @@ func (c *Configmap) AsMapStringString() map[string]string {
 			strPtr := val
 			stringVal = *strPtr
 		case fmt.Stringer:
-			stringer := val.(fmt.Stringer)
-			stringVal = stringer.String()
+			stringVal = val.String()
 		}
 		result[key] = stringVal
 	}
